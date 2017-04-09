@@ -1,4 +1,4 @@
-package testapp.spaceo.com.testapp;
+package testapp.spaceo.com.testapp.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -9,6 +9,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 .setDuration(300)
                 .start();
         binding.cardView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.card_view_slide));
+        binding.openProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+            }
+        });
     }
 
     private void openList() {

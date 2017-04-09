@@ -1,4 +1,4 @@
-package testapp.spaceo.com.testapp;
+package testapp.spaceo.com.testapp.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.adapters.ListAdapter;
 import testapp.spaceo.com.testapp.databinding.ActivityListBinding;
 import testapp.spaceo.com.testapp.model.ListItem;
