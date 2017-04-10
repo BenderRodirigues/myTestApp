@@ -2,4 +2,7 @@
     <string name="app_name">TestApp</string>
     <string name="check_button">Check</string>
     <string name="remove_button">Remove</string>
+
+    <string name="public_text">Public</string>
+    <string name="private_text">Private</string>
 </resources>

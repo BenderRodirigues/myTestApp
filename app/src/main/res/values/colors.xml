@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="privateAccount">#006b19</color>
+    <color name="publicAccount">#5f03d7</color>
 </resources>

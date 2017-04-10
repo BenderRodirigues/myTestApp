@@ -5,6 +5,7 @@ public class User {
 
     private String username;
     private String avatarUrl;
+    private boolean privateAccount;
 
     public User(String username) {
         this.username = username;
@@ -24,5 +25,13 @@ public class User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public boolean isPrivateAccount() {
+        return privateAccount;
+    }
+
+    public void setPrivateAccount(boolean privateAccount) {
+        this.privateAccount = privateAccount;
     }
 }

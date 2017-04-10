@@ -40,12 +40,6 @@ public class UserProfileFragment extends Fragment {
                 userViewModel.changeStatus();
             }
         });
-        binding.changenameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userViewModel.setUsername("ololo ololo");
-            }
-        });
         binding.setViewModel(userViewModel);
         return binding.getRoot();
     }
