@@ -19,20 +19,10 @@ public class UserViewModel{
     }
 
 
-//    public String getUsername() {
-//        return username.get();
-//    }
-
-
     public void setUsername(String username) {
         this.user.setUsername(username);
         this.username.set(username);
     }
-
-
-//    public boolean isLoading() {
-//        return loading.get();
-//    }
 
 
     public void setLoading(boolean loading) {
