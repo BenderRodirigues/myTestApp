@@ -13,7 +13,8 @@ import java.util.LinkedList;
 
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.adapters.ListAdapter;
-import testapp.spaceo.com.testapp.databinding.ActivityListBinding;
+import testapp.spaceo.com.testapp.databinding
+        .ActivityListBinding;
 import testapp.spaceo.com.testapp.model.ListItem;
 
 

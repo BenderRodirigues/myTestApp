@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="user"
-            type="testapp.spaceo.com.testapp.model.User"/>
+            name="viewModel"
+            type="testapp.spaceo.com.testapp.model.UserViewModel"/>
         <import type="android.view.View" alias="View"/>
     </data>
     <android.support.constraint.ConstraintLayout
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@{user.userneme}"
+            android:text="@{viewModel.username}"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView"
@@ -40,15 +40,16 @@
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/usernameView"
-            android:layout_marginTop="0dp">
+            android:layout_marginTop="0dp"
+            android:id="@+id/frameLayout">
 
             <Button
                 android:id="@+id/checkButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{user.active ? @string/check_button : @string/remove_button}"
-                android:visibility="@{!user.loading ? View.VISIBLE : View.GONE}"/>
+                android:text="@string/check_button"
+                android:visibility="@{!viewModel.loading ? View.VISIBLE : View.GONE}"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -56,7 +57,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="@{user.loading ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
         </FrameLayout>
+
+        <Button
+            android:id="@+id/changenameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="0dp"
+            android:text="Change name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
     </android.support.constraint.ConstraintLayout>
 </layout>

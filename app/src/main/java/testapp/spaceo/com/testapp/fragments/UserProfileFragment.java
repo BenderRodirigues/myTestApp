@@ -2,7 +2,6 @@ package testapp.spaceo.com.testapp.fragments;
 
 import android.app.Fragment;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,12 +11,13 @@ import android.view.ViewGroup;
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.FragmentUserProfileBinding;
 import testapp.spaceo.com.testapp.model.User;
+import testapp.spaceo.com.testapp.model.UserViewModel;
 
 
 public class UserProfileFragment extends Fragment {
 
     private FragmentUserProfileBinding binding;
-    private User user;
+    private UserViewModel userViewModel;
 
     public static UserProfileFragment newInstance() {
 
@@ -32,14 +32,21 @@ public class UserProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false);
+        User user = new User("Some user name");
+        userViewModel = new UserViewModel(user);
         binding.checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.changeStatus();
+                userViewModel.changeStatus();
             }
         });
-        user = new User("Some user name");
-        binding.setUser(user);
+        binding.changenameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userViewModel.setUsername("ololo ololo");
+            }
+        });
+        binding.setViewModel(userViewModel);
         return binding.getRoot();
     }
 
