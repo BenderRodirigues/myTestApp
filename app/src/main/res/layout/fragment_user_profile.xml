@@ -44,14 +44,6 @@
             android:id="@+id/frameLayout"
             android:layout_marginRight="8dp">
 
-            <Button
-                android:id="@+id/checkButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/check_button"
-                android:visibility="@{!viewModel.loading ? View.VISIBLE : View.GONE}"/>
-
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
@@ -59,6 +51,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
+
+            <Button
+                android:id="@+id/checkButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/check_button"
+                android:visibility="@{!viewModel.loading ? View.VISIBLE : View.GONE}" />
         </FrameLayout>
 
         <EditText
@@ -84,5 +84,6 @@
             android:text="@{viewModel.active ? @string/public_text : @string/private_text, default=checkbox}"
             app:layout_constraintLeft_toLeftOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/usernameEditTextView" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>
