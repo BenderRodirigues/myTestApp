@@ -44,7 +44,7 @@ public class ConstraintAnimationsActivity extends AppCompatActivity {
         });
     }
 
-    private void showFull(boolean extended) {
+    protected void showFull(boolean extended) {
         TransitionManager.beginDelayedTransition(binding.mainConstraint);
         if(extended) {
             setExpanded.applyTo(binding.mainConstraint);

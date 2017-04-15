@@ -19,7 +19,6 @@
             app:imageUrl="@{viewModel.avatar}"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="32dp"
-            android:layout_marginLeft="32dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginStart="32dp" />
 
@@ -27,7 +26,6 @@
             android:id="@+id/usernameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:textColor="@{viewModel.active ? @color/privateAccount : @color/publicAccount}"
             android:text="@{viewModel.username, default=PLACEHOLDER}"
             android:textSize="18sp"
@@ -39,7 +37,6 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/usernameView"
             android:layout_marginTop="0dp"
@@ -70,7 +67,7 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@={viewModel.username}"
+            android:text="@={viewModel.username, default=Username}"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="@+id/usernameView"
             app:layout_constraintTop_toBottomOf="@+id/usernameView" />
@@ -82,7 +79,7 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="16dp"
             android:checked="@={viewModel.active}"
-            android:text="@{viewModel.active ? @string/public_text : @string/private_text}"
+            android:text="@{viewModel.active ? @string/public_text : @string/private_text, default=checkbox}"
             app:layout_constraintLeft_toLeftOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/usernameEditTextView" />
     </android.support.constraint.ConstraintLayout>
