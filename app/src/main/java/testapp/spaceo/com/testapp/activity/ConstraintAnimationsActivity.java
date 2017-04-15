@@ -10,6 +10,8 @@ import android.view.View;
 
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.ActivityConstraintAnimBinding;
+import testapp.spaceo.com.testapp.model.User;
+import testapp.spaceo.com.testapp.model.UserViewModel;
 
 
 public class ConstraintAnimationsActivity extends AppCompatActivity {
@@ -22,6 +24,10 @@ public class ConstraintAnimationsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_constraint_anim);
+        User user = new User("Petrov Ivan");
+        user.setSkills(getString(R.string.skils_template));
+        user.setPosition("Just worker");
+        binding.setViewModel(new UserViewModel(user));
         setCollapsed.clone(binding.mainConstraint);
         setExpanded.clone(this, R.layout.activity_constraint_anim_expanded);
         binding.showextended.setOnClickListener(new View.OnClickListener() {

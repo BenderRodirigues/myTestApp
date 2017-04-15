@@ -5,10 +5,14 @@ public class User {
 
     private String username;
     private String avatarUrl;
+    private String position;
+    private String skills;
+
     private boolean privateAccount;
 
     public User(String username) {
         this.username = username;
+        this.avatarUrl = "http://i.imgur.com/YZ3TCPM.jpg";
     }
 
     public String getUsername() {
@@ -25,6 +29,22 @@ public class User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
     }
 
     public boolean isPrivateAccount() {
