@@ -5,4 +5,5 @@
 
     <string name="public_text">Public</string>
     <string name="private_text">Private</string>
+    <string name="skils_template">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae sapien sed arcu mattis pharetra at nec leo. Suspendisse in libero pellentesque, semper est non, auctor dolor. Cras scelerisque felis ut leo dignissim, sit amet mollis nisl aliquam. Phasellus vitae urna in nunc ullamcorper cursus at ac sapien. Fusce turpis quam, volutpat a tempus vel, suscipit interdum nunc. In suscipit non augue at accumsan. Nullam vitae est ut metus ornare posuere. Vestibulum ultricies orci fermentum laoreet pellentesque. Morbi feugiat justo imperdiet urna suscipit, sit amet efficitur felis sagittis. Sed posuere interdum massa ut pharetra. Sed vel quam interdum, feugiat eros sit amet, porta erat. In vehicula ipsum vitae velit semper volutpat.</string>
 </resources>

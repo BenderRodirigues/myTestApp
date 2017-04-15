@@ -52,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
             }
         });
+        binding.openAnim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ConstraintAnimationsActivity.class));
+            }
+        });
     }
 
     private void openList() {

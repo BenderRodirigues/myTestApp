@@ -79,5 +79,15 @@
             app:layout_constraintLeft_toRightOf="@+id/openList"
             app:layout_constraintTop_toTopOf="@+id/openList" />
 
+        <Button
+            android:id="@+id/openAnim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Open Animation Test Activity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>
