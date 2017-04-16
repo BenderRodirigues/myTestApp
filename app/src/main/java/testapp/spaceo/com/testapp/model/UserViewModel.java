@@ -32,7 +32,7 @@ public class UserViewModel{
                 .load(url)
                 .resize(300, 300)
                 .centerCrop()
-                .placeholder(R.drawable.ic_android)
+                .placeholder(R.drawable.ic_placeholder)
                 .transform(new CircleTransform())
                 .into(view);
     }

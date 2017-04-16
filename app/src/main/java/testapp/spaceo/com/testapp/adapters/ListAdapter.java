@@ -12,19 +12,21 @@ import java.util.LinkedList;
 
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.ItemBinding;
-import testapp.spaceo.com.testapp.model.ListItem;
+import testapp.spaceo.com.testapp.model.User;
+import testapp.spaceo.com.testapp.model.UserViewModel;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
-    private Collection<ListItem> objects;
+    private Collection<User> objects;
 
     public ListAdapter() {
         objects = new LinkedList<>();
     }
 
-    public ListAdapter addItems(Collection<ListItem> items) {
+    public ListAdapter addItems(Collection<User> items) {
         if(items != null) {
             objects.addAll(items);
+            notifyDataSetChanged();
         }
         return this;
     }
@@ -37,12 +39,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ListItem item = getItem(position);
+        User item = getItem(position);
         holder.update(item);
     }
 
-    private ListItem getItem(int position) {
-        return ((LinkedList<ListItem>) objects).get(position);
+    private User getItem(int position) {
+        return ((LinkedList<User>) objects).get(position);
     }
 
     @Override
@@ -50,7 +52,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return objects.size();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder implements ViewHolderInterface<ListItem> {
+    protected class ViewHolder extends RecyclerView.ViewHolder implements ViewHolderInterface<User> {
 
         private final ItemBinding binding;
 
@@ -61,8 +63,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
         @Override
-        public void update(ListItem item) {
-            binding.setItem(item);
+        public void update(User item) {
+            binding.setViewModel(new UserViewModel(item));
         }
     }
 }

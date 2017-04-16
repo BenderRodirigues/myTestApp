@@ -10,9 +10,11 @@ public class User {
 
     private boolean privateAccount;
 
+    public User() {
+    }
+
     public User(String username) {
         this.username = username;
-        this.avatarUrl = "http://i.imgur.com/YZ3TCPM.jpg";
     }
 
     public String getUsername() {
