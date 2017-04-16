@@ -15,10 +15,8 @@ import testapp.spaceo.com.testapp.model.UserViewModel;
 
 
 public class UserProfileFragment extends Fragment {
-
-    private FragmentUserProfileBinding binding;
     private UserViewModel userViewModel;
-
+    
     public static UserProfileFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -31,7 +29,7 @@ public class UserProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false);
+        FragmentUserProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false);
         User user = new User("Some user name");
         userViewModel = new UserViewModel(user);
         binding.checkButton.setOnClickListener(new View.OnClickListener() {
