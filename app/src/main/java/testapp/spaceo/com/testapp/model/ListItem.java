@@ -1,9 +1,7 @@
 package testapp.spaceo.com.testapp.model;
 
 
-import io.realm.RealmObject;
-
-public class ListItem extends RealmObject {
+public class ListItem {
     String title;
     String description;
 
