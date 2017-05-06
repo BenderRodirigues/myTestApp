@@ -14,18 +14,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
+import testapp.spaceo.com.testapp.BR;
 import testapp.spaceo.com.testapp.R;
-import testapp.spaceo.com.testapp.adapters.ListAdapter;
+import testapp.spaceo.com.testapp.adapters.RecyclerBindingAdapter;
 import testapp.spaceo.com.testapp.databinding.ActivityListBinding;
 import testapp.spaceo.com.testapp.model.User;
+import testapp.spaceo.com.testapp.model.UserViewModel;
 
 
 public class ListActivity extends AppCompatActivity {
 
     private ActivityListBinding binding;
-    private ListAdapter adapter;
+    private RecyclerBindingAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,20 +55,21 @@ public class ListActivity extends AppCompatActivity {
     private void initRecyclerView(RecyclerView recyclerView) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ListAdapter();
+        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<UserViewModel>());
+//        adapter = new ListAdapter();
         recyclerView.setAdapter(adapter);
         getItems();
     }
 
     private void getItems() {
-        final LinkedList<User> list = new LinkedList<>();
+        final LinkedList<UserViewModel> list = new LinkedList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("users");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    list.add(snapshot.getValue(User.class));
+                    list.add(new UserViewModel(snapshot.getValue(User.class)));
                 }
                 adapter.addItems(list);
             }

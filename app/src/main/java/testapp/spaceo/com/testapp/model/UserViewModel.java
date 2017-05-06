@@ -3,10 +3,12 @@ package testapp.spaceo.com.testapp.model;
 
 
 import android.databinding.BindingAdapter;
+import android.databinding.Observable;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -18,6 +20,8 @@ import testapp.spaceo.com.testapp.utils.CircleTransform;
 
 public class UserViewModel{
     private User user;
+
+    private static final String TAG = "UserViewModel";
 
     public final ObservableBoolean loading;
     public final ObservableBoolean active;
@@ -37,7 +41,7 @@ public class UserViewModel{
                 .into(view);
     }
 
-    public UserViewModel(User user) {
+    public UserViewModel(final User user) {
         this.user = user;
         avatar = new ObservableField<>(user.getAvatarUrl());
         username = new ObservableField<>(user.getUsername());
@@ -45,10 +49,19 @@ public class UserViewModel{
         skills = new ObservableField<>(user.getSkills());
         loading = new ObservableBoolean(false);
         active = new ObservableBoolean(user.isPrivateAccount());
+        username.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable observable, int i) {
+                String changedUsername = username.get();
+                Log.d(TAG, "onPropertyChanged: " + changedUsername);
+                user.setUsername(changedUsername);
+            }
+        });
     }
 
 
     public void setUsername(String username) {
+        Log.d(TAG, "setUsername() called with: username = [" + username + "]");
         this.user.setUsername(username);
         this.username.set(username);
     }
