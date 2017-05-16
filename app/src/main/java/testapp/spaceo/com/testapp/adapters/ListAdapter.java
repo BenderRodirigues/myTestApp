@@ -13,7 +13,8 @@ import java.util.LinkedList;
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.ItemBinding;
 import testapp.spaceo.com.testapp.model.User;
-import testapp.spaceo.com.testapp.model.UserViewModel;
+import testapp.spaceo.com.testapp.model.ProfileViewModel;
+import testapp.spaceo.com.testapp.repository.UsersRepository;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
@@ -63,8 +64,28 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
 
         @Override
-        public void update(User item) {
-            binding.setViewModel(new UserViewModel(item));
+        public void update(final User item) {
+            binding.setViewModel(new ProfileViewModel(new UsersRepository() {
+                @Override
+                public User getUserById(int id) {
+                    return null;
+                }
+
+                @Override
+                public Collection<User> getUsers() {
+                    return null;
+                }
+
+                @Override
+                public User getCurrentUser() {
+                    return item;
+                }
+
+                @Override
+                public void save(User user) {
+
+                }
+            }));
         }
     }
 }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="testapp.spaceo.com.testapp.model.UserViewModel"/>
+            type="testapp.spaceo.com.testapp.model.ProfileViewModel"/>
         <import type="android.view.View" alias="View"/>
     </data>
     <android.support.constraint.ConstraintLayout

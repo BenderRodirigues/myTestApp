@@ -15,14 +15,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 
 import testapp.spaceo.com.testapp.BR;
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.adapters.RecyclerBindingAdapter;
 import testapp.spaceo.com.testapp.databinding.ActivityListBinding;
+import testapp.spaceo.com.testapp.model.ProfileViewModel;
 import testapp.spaceo.com.testapp.model.User;
-import testapp.spaceo.com.testapp.model.UserViewModel;
+import testapp.spaceo.com.testapp.repository.UsersRepository;
 
 
 public class ListActivity extends AppCompatActivity {
@@ -55,21 +57,41 @@ public class ListActivity extends AppCompatActivity {
     private void initRecyclerView(RecyclerView recyclerView) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<UserViewModel>());
+        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<ProfileViewModel>());
 //        adapter = new ListAdapter();
         recyclerView.setAdapter(adapter);
         getItems();
     }
 
     private void getItems() {
-        final LinkedList<UserViewModel> list = new LinkedList<>();
+        final LinkedList<ProfileViewModel> list = new LinkedList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("users");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    list.add(new UserViewModel(snapshot.getValue(User.class)));
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    list.add(new ProfileViewModel(new UsersRepository() {
+                        @Override
+                        public User getUserById(int id) {
+                            return null;
+                        }
+
+                        @Override
+                        public Collection<User> getUsers() {
+                            return null;
+                        }
+
+                        @Override
+                        public User getCurrentUser() {
+                            return snapshot.getValue(User.class);
+                        }
+
+                        @Override
+                        public void save(User user) {
+
+                        }
+                    }));
                 }
                 adapter.addItems(list);
             }

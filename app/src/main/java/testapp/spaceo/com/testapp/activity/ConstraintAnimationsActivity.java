@@ -1,8 +1,6 @@
 package testapp.spaceo.com.testapp.activity;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintSet;
@@ -10,12 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionManager;
 import android.view.View;
 
-import java.util.concurrent.Callable;
-
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.ActivityConstraintAnimBinding;
 import testapp.spaceo.com.testapp.model.User;
-import testapp.spaceo.com.testapp.model.UserViewModel;
+import testapp.spaceo.com.testapp.model.ProfileViewModel;
+import testapp.spaceo.com.testapp.repository.UsersRepositoryImpl;
 
 
 public class ConstraintAnimationsActivity extends AppCompatActivity {
@@ -31,7 +28,7 @@ public class ConstraintAnimationsActivity extends AppCompatActivity {
         User user = new User("Petrov Ivan");
         user.setSkills(getString(R.string.skils_template));
         user.setPosition("Just worker");
-        binding.setViewModel(new UserViewModel(user));
+        binding.setViewModel(new ProfileViewModel(new UsersRepositoryImpl()));
         setCollapsed.clone(binding.mainConstraint);
         setExpanded.clone(this, R.layout.activity_constraint_anim_expanded);
         binding.showextended.setOnClickListener(new View.OnClickListener() {

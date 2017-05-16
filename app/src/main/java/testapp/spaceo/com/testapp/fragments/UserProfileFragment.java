@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.databinding.FragmentUserProfileBinding;
-import testapp.spaceo.com.testapp.model.User;
-import testapp.spaceo.com.testapp.model.UserViewModel;
+import testapp.spaceo.com.testapp.model.ProfileViewModel;
+import testapp.spaceo.com.testapp.repository.UsersRepository;
+import testapp.spaceo.com.testapp.repository.UsersRepositoryImpl;
 
 
 public class UserProfileFragment extends Fragment {
-    private UserViewModel userViewModel;
+    private UsersRepository repository;
+    private ProfileViewModel profileViewModel;
     
     public static UserProfileFragment newInstance() {
 
@@ -26,19 +28,24 @@ public class UserProfileFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        repository = new UsersRepositoryImpl();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         FragmentUserProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false);
-        User user = new User("Some user name");
-        userViewModel = new UserViewModel(user);
+        profileViewModel = new ProfileViewModel(repository);
         binding.checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userViewModel.changeStatus();
+                profileViewModel.changeStatus();
             }
         });
-        binding.setViewModel(userViewModel);
+        binding.setViewModel(profileViewModel);
         return binding.getRoot();
     }
 

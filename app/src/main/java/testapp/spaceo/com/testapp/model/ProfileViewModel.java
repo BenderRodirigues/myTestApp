@@ -6,22 +6,22 @@ import android.databinding.BindingAdapter;
 import android.databinding.Observable;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.app.App;
+import testapp.spaceo.com.testapp.repository.UsersRepository;
 import testapp.spaceo.com.testapp.utils.CircleTransform;
 
-public class UserViewModel{
+public class ProfileViewModel {
+    private final UsersRepository repository;
     private User user;
 
-    private static final String TAG = "UserViewModel";
+    private static final String TAG = "ProfileViewModel";
 
     public final ObservableBoolean loading;
     public final ObservableBoolean active;
@@ -41,8 +41,9 @@ public class UserViewModel{
                 .into(view);
     }
 
-    public UserViewModel(final User user) {
-        this.user = user;
+    public ProfileViewModel(final UsersRepository repository) {
+        this.repository = repository;
+        this.user = repository.getCurrentUser();
         avatar = new ObservableField<>(user.getAvatarUrl());
         username = new ObservableField<>(user.getUsername());
         position = new ObservableField<>(user.getPosition());
@@ -53,7 +54,6 @@ public class UserViewModel{
             @Override
             public void onPropertyChanged(Observable observable, int i) {
                 String changedUsername = username.get();
-                Log.d(TAG, "onPropertyChanged: " + changedUsername);
                 user.setUsername(changedUsername);
             }
         });
@@ -64,21 +64,25 @@ public class UserViewModel{
         Log.d(TAG, "setUsername() called with: username = [" + username + "]");
         this.user.setUsername(username);
         this.username.set(username);
+        repository.save(user);
     }
 
     public void setActive(boolean active) {
         this.user.setPrivateAccount(active);
         this.active.set(active);
+        repository.save(user);
     }
 
     public void setPosition(String position) {
         this.position.set(position);
         user.setPosition(position);
+        repository.save(user);
     }
 
     public void setSkills(String skills) {
         this.skills.set(skills);
         user.setSkills(skills);
+        repository.save(user);
     }
 
     public void setLoading(boolean loading) {
