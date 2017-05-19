@@ -12,23 +12,26 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Collection;
+
 import testapp.spaceo.com.testapp.R;
 import testapp.spaceo.com.testapp.app.App;
 import testapp.spaceo.com.testapp.repository.UsersRepository;
+import testapp.spaceo.com.testapp.repository.UsersRepositoryImpl;
 import testapp.spaceo.com.testapp.utils.CircleTransform;
 
-public class ProfileViewModel {
+public class ProfileViewModel implements UsersRepositoryImpl.RepositoryCallback {
     private final UsersRepository repository;
     private User user;
 
     private static final String TAG = "ProfileViewModel";
 
-    public final ObservableBoolean loading;
-    public final ObservableBoolean active;
-    public final ObservableField<String> avatar;
-    public final ObservableField<String> username;
-    public final ObservableField<String> position;
-    public final ObservableField<String> skills;
+    public final ObservableBoolean loading = new ObservableBoolean();
+    public final ObservableBoolean active = new ObservableBoolean();
+    public final ObservableField<String> avatar = new ObservableField<>();
+    public final ObservableField<String> username = new ObservableField<>();
+    public final ObservableField<String> position = new ObservableField<>();
+    public final ObservableField<String> skills = new ObservableField<>();
 
     @BindingAdapter("binding:imageUrl")
     public static void setImage(ImageView view, String url) {
@@ -41,15 +44,17 @@ public class ProfileViewModel {
                 .into(view);
     }
 
-    public ProfileViewModel(final UsersRepository repository) {
-        this.repository = repository;
-        this.user = repository.getCurrentUser();
-        avatar = new ObservableField<>(user.getAvatarUrl());
-        username = new ObservableField<>(user.getUsername());
-        position = new ObservableField<>(user.getPosition());
-        skills = new ObservableField<>(user.getSkills());
-        loading = new ObservableBoolean(false);
-        active = new ObservableBoolean(user.isPrivateAccount());
+    public ProfileViewModel() {
+        this.repository = new UsersRepositoryImpl();
+        repository.getCurrentUser(this);
+        initUser();
+    }
+
+    private void initUser() {
+        avatar.set(user.getAvatarUrl());
+        username.set(user.getUsername());
+        position.set(user.getPosition());
+        skills.set(user.getSkills());
         username.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
@@ -104,4 +109,13 @@ public class ProfileViewModel {
     }
 
 
+    @Override
+    public void onUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public void onUsers(Collection<User> userCollection) {
+
+    }
 }

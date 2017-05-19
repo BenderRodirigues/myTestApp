@@ -65,27 +65,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         @Override
         public void update(final User item) {
-            binding.setViewModel(new ProfileViewModel(new UsersRepository() {
-                @Override
-                public User getUserById(int id) {
-                    return null;
-                }
-
-                @Override
-                public Collection<User> getUsers() {
-                    return null;
-                }
-
-                @Override
-                public User getCurrentUser() {
-                    return item;
-                }
-
-                @Override
-                public void save(User user) {
-
-                }
-            }));
+            binding.setViewModel(new ProfileViewModel());
         }
     }
 }

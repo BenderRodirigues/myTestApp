@@ -25,6 +25,7 @@ import testapp.spaceo.com.testapp.databinding.ActivityListBinding;
 import testapp.spaceo.com.testapp.model.ProfileViewModel;
 import testapp.spaceo.com.testapp.model.User;
 import testapp.spaceo.com.testapp.repository.UsersRepository;
+import testapp.spaceo.com.testapp.repository.UsersRepositoryImpl;
 
 
 public class ListActivity extends AppCompatActivity {
@@ -57,49 +58,59 @@ public class ListActivity extends AppCompatActivity {
     private void initRecyclerView(RecyclerView recyclerView) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<ProfileViewModel>());
+        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<User>());
 //        adapter = new ListAdapter();
         recyclerView.setAdapter(adapter);
-        getItems();
-    }
-
-    private void getItems() {
-        final LinkedList<ProfileViewModel> list = new LinkedList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("users");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        new UsersRepositoryImpl().getUsers(new UsersRepositoryImpl.RepositoryCallback() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    list.add(new ProfileViewModel(new UsersRepository() {
-                        @Override
-                        public User getUserById(int id) {
-                            return null;
-                        }
+            public void onUser(User user) {
 
-                        @Override
-                        public Collection<User> getUsers() {
-                            return null;
-                        }
-
-                        @Override
-                        public User getCurrentUser() {
-                            return snapshot.getValue(User.class);
-                        }
-
-                        @Override
-                        public void save(User user) {
-
-                        }
-                    }));
-                }
-                adapter.addItems(list);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onUsers(Collection<User> userCollection) {
+                adapter.addItems(userCollection);
             }
         });
     }
+
+//    private void getItems() {
+//        final LinkedList<ProfileViewModel> list = new LinkedList<>();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference("users");
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    list.add(new ProfileViewModel(new UsersRepository() {
+//                        @Override
+//                        public User getUserById(int id) {
+//                            return null;
+//                        }
+//
+//                        @Override
+//                        public Collection<User> getUsers() {
+//                            return null;
+//                        }
+//
+//                        @Override
+//                        public User getCurrentUser() {
+//                            return snapshot.getValue(User.class);
+//                        }
+//
+//                        @Override
+//                        public void save(User user) {
+//
+//                        }
+//                    }));
+//                }
+//                adapter.addItems(list);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }

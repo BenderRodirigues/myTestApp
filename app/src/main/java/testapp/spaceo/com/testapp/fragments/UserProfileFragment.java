@@ -16,7 +16,6 @@ import testapp.spaceo.com.testapp.repository.UsersRepositoryImpl;
 
 
 public class UserProfileFragment extends Fragment {
-    private UsersRepository repository;
     private ProfileViewModel profileViewModel;
     
     public static UserProfileFragment newInstance() {
@@ -31,14 +30,13 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        repository = new UsersRepositoryImpl();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         FragmentUserProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false);
-        profileViewModel = new ProfileViewModel(repository);
+        profileViewModel = new ProfileViewModel();
         binding.checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

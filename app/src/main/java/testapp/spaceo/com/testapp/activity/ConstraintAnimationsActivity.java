@@ -28,7 +28,7 @@ public class ConstraintAnimationsActivity extends AppCompatActivity {
         User user = new User("Petrov Ivan");
         user.setSkills(getString(R.string.skils_template));
         user.setPosition("Just worker");
-        binding.setViewModel(new ProfileViewModel(new UsersRepositoryImpl()));
+        binding.setViewModel(new ProfileViewModel());
         setCollapsed.clone(binding.mainConstraint);
         setExpanded.clone(this, R.layout.activity_constraint_anim_expanded);
         binding.showextended.setOnClickListener(new View.OnClickListener() {
