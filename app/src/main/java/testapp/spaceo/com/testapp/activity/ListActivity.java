@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,24 +15,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
-import testapp.spaceo.com.testapp.BR;
 import testapp.spaceo.com.testapp.R;
-import testapp.spaceo.com.testapp.adapters.RecyclerBindingAdapter;
+import testapp.spaceo.com.testapp.adapters.ListAdapter;
 import testapp.spaceo.com.testapp.databinding.ActivityListBinding;
-import testapp.spaceo.com.testapp.model.ProfileViewModel;
 import testapp.spaceo.com.testapp.model.User;
-import testapp.spaceo.com.testapp.repository.UsersRepository;
 import testapp.spaceo.com.testapp.repository.UsersRepositoryImpl;
 
 
 public class ListActivity extends AppCompatActivity {
 
     private ActivityListBinding binding;
-    private RecyclerBindingAdapter adapter;
+    private ListAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,8 +54,8 @@ public class ListActivity extends AppCompatActivity {
     private void initRecyclerView(RecyclerView recyclerView) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<User>());
-//        adapter = new ListAdapter();
+//        adapter = new RecyclerBindingAdapter<>(R.layout.item, BR.viewModel, new ArrayList<User>());
+        adapter = new ListAdapter();
         recyclerView.setAdapter(adapter);
         new UsersRepositoryImpl().getUsers(new UsersRepositoryImpl.RepositoryCallback() {
             @Override
