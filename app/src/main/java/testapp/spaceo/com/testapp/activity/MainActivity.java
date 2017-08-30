@@ -49,19 +49,23 @@ public class MainActivity extends AppCompatActivity {
         binding.openProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+                openScreen(new Intent(MainActivity.this, UserProfileActivity.class));
             }
         });
         binding.openAnim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ConstraintAnimationsActivity.class));
+                openScreen(new Intent(MainActivity.this, ConstraintAnimationsActivity.class));
             }
         });
     }
 
     private void openList() {
         Intent intent = new Intent(this, ListActivity.class);
+        openScreen(intent);
+    }
+
+    private void openScreen(Intent intent) {
         startActivity(intent);
     }
 
